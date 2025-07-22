@@ -1,12 +1,7 @@
-import os
 import openai
 import json
 
-from app.ocr import get_pdf_data
-
-
-AZURE_OPENAI_KEY = os.getenv("AZURE_OPENAI_KEY")
-AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+from part_1.config import AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_KEY
 
 # Set API Key & Endpoint
 openai.api_type = "azure"
@@ -15,8 +10,7 @@ openai.api_base = AZURE_OPENAI_ENDPOINT
 openai.api_key = AZURE_OPENAI_KEY
 
 
-def get_pdf_content_as_json(pdf_file: str) -> dict:
-    ocr_text = get_pdf_data(pdf_file)
+def extract_fields_with_gpt(ocr_text: str) -> dict:
     prompt = f"""
     You are an assistant that extracts structured data from National Insurance forms (ביטוח לאומי).
     Based on the following OCR text, return the result as a valid JSON **without any explanation or formatting**.
@@ -88,6 +82,3 @@ def get_pdf_content_as_json(pdf_file: str) -> dict:
     extracted_data = response["choices"][0]["message"]["content"]
     json_output = json.loads(extracted_data)
     return json_output
-
-
-get_pdf_content_as_json("../data/phase1_data/283_ex1.pdf")
