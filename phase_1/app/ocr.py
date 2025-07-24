@@ -2,7 +2,7 @@
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 
-from part_1.config import AZURE_FORM_ENDPOINT, AZURE_FORM_KEY
+from config import AZURE_FORM_ENDPOINT, AZURE_FORM_KEY
 
 # Connect to Azure document form recognizer by the specifiy credentials
 client = DocumentAnalysisClient(
