@@ -61,7 +61,7 @@ def get_qa_chain_response(user_prompt, user_info: dict):
     """
     vector_store = load_vector_store_once()
     retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 10})
-    print(user_prompt)
+
     # Retrieve relevant documents based on user question to add context as knowledge base in my prompt
     docs = retriever.get_relevant_documents(user_prompt)
     for doc in docs:
@@ -70,9 +70,6 @@ def get_qa_chain_response(user_prompt, user_info: dict):
     knowledge_content = "\n\n".join([doc.page_content for doc in docs])
     customize_prompt = PromptTemplates.get_qa_prompt(user_info=UserInfo(**user_info), knowledge_content=knowledge_content)
 
-    print()
-    print("Customize prompt")
-    print(customize_prompt)
     llm = AzureChatOpenAI(
         azure_endpoint=AZURE_OPENAI_ENDPOINT,
         api_key=AZURE_OPENAI_KEY,
