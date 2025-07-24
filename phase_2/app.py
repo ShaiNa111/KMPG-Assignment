@@ -63,3 +63,4 @@ if user_input:
             response_content = response.get('content')
         with st.chat_message("assistant"):
             st.write(response_content)
+            st.session_state.messages.append({"role": "assistant", "content": response_content})

@@ -64,11 +64,9 @@ def get_qa_chain_response(user_prompt, user_info: dict):
 
     # Retrieve relevant documents based on user question to add context as knowledge base in my prompt
     docs = retriever.get_relevant_documents(user_prompt)
-    for doc in docs:
-        print(doc)
 
     knowledge_content = "\n\n".join([doc.page_content for doc in docs])
-    customize_prompt = PromptTemplates.get_qa_prompt(user_info=UserInfo(**user_info), knowledge_content=knowledge_content)
+    customize_prompt = PromptTemplates.get_qa_prompt(user_info=UserInfo(**user_info), knowledge_content=knowledge_content, user_prompt=user_prompt)
 
     llm = AzureChatOpenAI(
         azure_endpoint=AZURE_OPENAI_ENDPOINT,
@@ -78,6 +76,6 @@ def get_qa_chain_response(user_prompt, user_info: dict):
         temperature=0.3,
     )
 
-    content = llm.invoke(customize_prompt).content
+    response = llm.invoke(customize_prompt)
 
-    return content
+    return response.content
