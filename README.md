@@ -3,7 +3,7 @@
 
 ## Welcome to my Assignment.
 In this project there are 2 inner folders. </br>
-phase_1: directory for the phase 1 of the assignment
+phase_1: directory for the phase 1 of the assignment </br>
 phase_2: directory for the phase 2 of the assignment
 </br>
 
