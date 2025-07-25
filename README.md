@@ -12,3 +12,5 @@ phase_2: directory for the phase 2 of the assignment
 * [Part 2: Microservice-based ChatBot Q&A on Medical Services](phase_2/README.md)
 
 <b>Note:</b> In every phase folder there is a README.me that illustrate how to load and run the current task
+</br>
+Pre installtion: `pip install -r requirements.txt`
