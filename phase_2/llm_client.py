@@ -60,7 +60,7 @@ def get_qa_chain_response(user_prompt, user_info: dict):
 
     """
     vector_store = load_vector_store_once()
-    retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 10})
+    retriever = vector_store.as_retriever(search_type="similarity_score_threshold", search_kwargs={'score_threshold': 0.8})
 
     # Retrieve relevant documents based on user question to add context as knowledge base in my prompt
     docs = retriever.invoke(user_prompt)
